@@ -20,8 +20,6 @@ class LoginView(TokenObtainPairView):
             raise InvalidToken(e.args[0])
 
         result = serializer.validated_data
-        res = {}
-        res['access_token'] = result['access']
-        res['refresh_token'] = result['refresh']
+        res = {'token': result['access'], 'refresh': result['refresh']}
 
         return Response(res, status=status.HTTP_200_OK)

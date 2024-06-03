@@ -29,13 +29,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "simpleui",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "simpleui",
     "rest_framework",
     "users",
     "TestTask",
@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     "Scenes",
     "Cronjob",
     "BugManage",
-    "rest_framework_simplejwt"
+    "rest_framework_simplejwt",
+    "django_filters"
 ]
 
 MIDDLEWARE = [
@@ -142,10 +143,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ##################### rest_framework配置 #####################
 REST_FRAMEWORK = {
+    # jwt鉴权方式
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+    ),
+    # drf使用过滤配置
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
 
@@ -171,3 +177,6 @@ SIMPLE_JWT = {
     "USER_ID_CLAIM": "user_id",
 
 }
+
+# #####文件上传保存路径
+MEDIA_ROOT = BASE_DIR / 'files'

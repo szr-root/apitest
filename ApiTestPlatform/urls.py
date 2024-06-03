@@ -18,10 +18,27 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from users.views import LoginView
 
+from rest_framework import routers
+from Testproject.views import TestProjectView, TestEnvView, TestFileView
+from TestInterface.views import TestInterfaceView,InterFaceCaseView
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path('api/users/login/', TokenObtainPairView.as_view(), name='login'),  # 登录
     path('api/users/login/', LoginView.as_view(), name='login'),  # 登录
-    path('/api/users/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('token/verify', TokenVerifyView.as_view(), name='token_verify')
+    path('api/users/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/verify/', TokenVerifyView.as_view(), name='token_verify')
 ]
+
+router = routers.SimpleRouter()
+
+# 测试项目
+router.register(r'api/testPro/projects', TestProjectView)
+router.register(r'api/testPro/envs', TestEnvView)
+router.register(r'api/testPro/files', TestFileView)
+
+# 测试接口
+router.register(r'api/TestInterface/interfaces', TestInterfaceView)
+router.register(r'api/TestInterface/cases', InterFaceCaseView)
+
+urlpatterns += router.urls
