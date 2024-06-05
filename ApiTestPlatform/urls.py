@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
+from BugManage.views import BugManageView
+from Cronjob.views import CronJobView
 from Scenes.views import TestScenesView, SceneToCaseView, UpdateSceneCaseOrder
 from TestTask.views import TestTaskView, TestReportView, TestRecordView
 from users.views import LoginView
@@ -71,5 +73,11 @@ router.register('api/testTask/tasks', TestTaskView)
 router.register('api/testTask/report', TestReportView)
 # 注册测试运行记录的路由
 router.register('api/testTask/records', TestRecordView)
+
+# 定时任务路由
+router.register('api/crontab/cronjob', CronJobView)
+
+# bug管理路由
+router.register('api/bug/bugs', BugManageView)
 
 urlpatterns += router.urls
