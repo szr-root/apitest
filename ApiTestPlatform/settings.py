@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "Cronjob",
     "BugManage",
     "rest_framework_simplejwt",
-    "django_filters"
+    "django_filters",
+    "django_celery_beat"
 ]
 
 MIDDLEWARE = [
@@ -180,3 +181,12 @@ SIMPLE_JWT = {
 
 # #####文件上传保存路径
 MEDIA_ROOT = BASE_DIR / 'files'
+
+# ##################### celery配置 #####################
+CELERY_TIMEZONE = 'Asia/Shanghai'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+# 配置任务消息中间件
+CELERY_BROKER_URL = 'redis://:qwe123@127.0.0.1:6379/1'
+# 指定调度器模型类
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'

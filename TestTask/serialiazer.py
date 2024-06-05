@@ -22,8 +22,8 @@ class TestTaskGetSerializer(serializers.ModelSerializer):
 
 
 class TestRecordSerializer(serializers.ModelSerializer):
-    env = serializers.StringRelatedField(read_only=True, source='env')
-    task = serializers.StringRelatedField(read_only=True, source='task')
+    env = serializers.StringRelatedField(read_only=True, source='env.name')
+    task = serializers.StringRelatedField(read_only=True, source='task.name')
 
     class Meta:
         model = TestRecord
