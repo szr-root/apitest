@@ -17,9 +17,18 @@ class BugHandleSerializer(serializers.ModelSerializer):
 
 class BugManageSerializer(serializers.ModelSerializer):
     """bug管理的序列化器"""
-    # interface_url = serializers.StringRelatedField(source='interface.url', read_only=True)
-    # handle = BugHandleSerializer(many=True, source="bughandle_set", read_only=True)
+    interface_url = serializers.StringRelatedField(source='interface.url', read_only=True)
+    handle = BugHandleSerializer(many=True, source="bughandle_set", read_only=True)
 
     class Meta:
         model = BugManage
         fields = '__all__'
+        # exclude = ['create_time', 'interface']
+
+
+class BugManageListSerializer(serializers.ModelSerializer):
+    interface_url = serializers.StringRelatedField(source='interface.url', read_only=True)
+
+    class Meta:
+        model = BugManage
+        fields = ['id', 'desc', 'interface_url', 'status', 'user', 'create_time']

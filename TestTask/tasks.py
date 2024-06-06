@@ -14,7 +14,6 @@ from Testproject.models import TestEnv
 @celery_app.task
 def run_test_task(env_id, task_id, tester):
     """
-
     :param env_id: 环境id
     :param task_id: 任务id
     :param tester: 调用人
@@ -66,6 +65,3 @@ def run_test_task(env_id, task_id, tester):
     return Response(result)
 
 
-@celery_app.task
-def work2():
-    print("task ----work2")
