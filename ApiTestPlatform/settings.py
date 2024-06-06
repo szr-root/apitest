@@ -46,10 +46,11 @@ INSTALLED_APPS = [
     "BugManage",
     "rest_framework_simplejwt",
     "django_filters",
-    "django_celery_beat"
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -190,3 +191,15 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BROKER_URL = 'redis://:qwe123@127.0.0.1:6379/1'
 # 指定调度器模型类
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+# ##################### adjax前段跨域请求配置 #####################
+# 凡是出现在白名单中的域名，都可以访问后端接口
+
+# CORS_ORIGIN_WHITELIST = (
+#     'http://127.0.0.1:8848',
+#     'http://localhost:8080',
+# )
+# 允许所有用户跨域访问
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS 指明在跨域访问中，后端是否支持对cookie的操作。
+CORS_ALLOW_CREDENTIALS = True

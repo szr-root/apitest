@@ -23,3 +23,12 @@ class BugManageSerializer(serializers.ModelSerializer):
     class Meta:
         model = BugManage
         fields = '__all__'
+        # exclude = ['create_time', 'interface']
+
+
+class BugManageListSerializer(serializers.ModelSerializer):
+    interface_url = serializers.StringRelatedField(source='interface.url', read_only=True)
+
+    class Meta:
+        model = BugManage
+        fields = ['id', 'desc', 'interface_url', 'status', 'user', 'create_time']

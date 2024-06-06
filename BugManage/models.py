@@ -15,6 +15,9 @@ class BugManage(models.Model):
     user = models.CharField(max_length=10, help_text="提交者", verbose_name="提交者", blank=True)
     info = models.JSONField(help_text="用例执行信息", verbose_name='用例执行信息', default=dict, blank=True)
 
+    def __str__(self):
+        return str(self.id)
+
     class Meta:
         db_table = 'bugmanage'
         verbose_name_plural = 'bug管理表'
